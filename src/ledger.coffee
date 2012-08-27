@@ -2,23 +2,17 @@ Accounting = require 'accounting'
 Expense = require './expense'
 
 class Ledger
-  constructor: (@robot) ->
+  constructor: () ->
     @expenses = []
-
-    @robot.brain.on 'loaded', =>
-      @robot.brain.data.ledger ?= []
-      @expenses = @robot.brain.data.ledger
 
   add: (expense) ->
     @expenses.push expense.toJSON()
-    @robot.brain.data.ledger = @expenses
 
   all: ->
     Expense.create(expense) for expense in @expenses
 
   deleteAll: ->
     @expenses = []
-    @robot.brain.data.ledger = []
 
   total: ->
     total = 0
