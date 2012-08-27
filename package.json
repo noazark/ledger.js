@@ -20,5 +20,8 @@
     "chai": "1.2.0",
     "sinon": "1.4.2"
   },
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "scripts": {
+    "test": "make"
+  }
 }
