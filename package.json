@@ -1,11 +1,11 @@
 {
   "author": "Noah H. Smith <noah@rendergardenmedia.com>",
-  "name": "ledgerjs",
+  "name": "ledger.js",
   "description": "Javascript Accounting",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/noazark/ledgerjs.git"
+    "url": "https://github.com/noazark/ledger.js.git"
   },
   "engines": {
     "node": "~0.6.10"
