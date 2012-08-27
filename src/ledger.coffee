@@ -6,10 +6,12 @@ class Ledger
     @expenses = []
 
   add: (expense) ->
+    throw new TypeError unless expense instanceof Expense
     @expenses.push expense.toJSON()
 
   all: ->
-    Expense.create(expense) for expense in @expenses
+    for expense in @expenses
+      Expense.create expense
 
   deleteAll: ->
     @expenses = []

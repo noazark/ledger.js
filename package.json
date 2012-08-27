@@ -12,8 +12,12 @@
   },
   "main": "index",
   "dependencies": {
-    "accounting": "0.3.2"
+    "accounting": "0.3.2",
+    "coffee-script": "1.3.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "1.4.0",
+    "chai": "1.2.0"
+  },
   "optionalDependencies": {}
 }
