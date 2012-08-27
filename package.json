@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/noazark/ledgerjs.git"
+    "url": "https://github.com/noazark/ledgerjs.git"
   },
   "engines": {
     "node": "~0.6.10"
