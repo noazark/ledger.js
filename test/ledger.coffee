@@ -9,18 +9,12 @@ describe "Ledger", ->
 
   describe "#all", ->
     it "returns all expenses", ->
+      array = ['a', 'b']
       @ledger.expenses = ['a', 'b']
 
       expect(
-        @ledger.all().length
-      ).to.equal(2)
-
-    it "creates an expense object out of each returned item", ->
-      @ledger.expenses = [{amount: "$4", payee: "Revocup", date: 0}]
-
-      expect(
-        @ledger.all()[0]
-      ).to.be.an.instanceof(Expense)
+        @ledger.all()
+      ).to.eql(array)
 
   describe "#add", ->
     it "adds an expense", ->
@@ -57,3 +51,23 @@ describe "Ledger", ->
       expect(
         @ledger.total()
       ).to.equal("$0.00")
+
+  describe "#toString", ->
+    it "creates a list of all expenses", ->
+      expense = new Expense "$13", "Revocup"
+
+      # add two expenses to make sure it lists out correctly
+      @ledger.add expense
+      @ledger.add expense
+
+      expect(
+        @ledger.toString()
+      ).to.equal(
+        "#{expense.toString()}" + "\n" +
+        "#{expense.toString()}"
+      )
+
+    it "creates an empty string when there are no expenses", ->
+      expect(
+        @ledger.toString()
+      ).to.be.empty
