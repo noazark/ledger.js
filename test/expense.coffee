@@ -25,21 +25,6 @@ describe "Expense", ->
   it "timestamps itself when created", ->
     expect(@expense.date).to.eql @now
 
-  describe "#addTransaction", ->
-    it "attaches a transaction to the expense", ->
-      @expense.addTransaction new Transaction "$0"
-
-      expect(@expense.transactions).to.have.length(1)
-
-  describe "#createTransaction", ->
-    it "returns a new transaction", ->
-      expect(@expense.createTransaction "$0").to.be.an.instanceof(Transaction)
-
-    it "adds the new transaction to transactions", ->
-      transaction = @expense.createTransaction "$0"
-
-      expect(@expense.transactions.pop()).to.equal(transaction)
-
   describe "#total", ->
     it "sums the amount of each transaction", ->
       @expense.transactions = [{amount: 4}, {amount: 5.64}]

@@ -5,15 +5,6 @@ class Ledger
   constructor: () ->
     @expenses = []
 
-  addExpense: (expense) ->
-    throw new TypeError unless expense instanceof Expense
-    @expenses.push expense
-
-  createExpense: (params...) ->
-    expense = new Expense params...
-    @addExpense expense
-    return expense
-
   all: ->
     @expenses
 

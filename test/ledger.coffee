@@ -16,30 +16,9 @@ describe "Ledger", ->
         @ledger.all()
       ).to.eql(array)
 
-  describe "#addExpense", ->
-    it "adds an expense", ->
-      @ledger.addExpense new Expense "Revocup"
-
-      expect(
-        @ledger.expenses
-      ).to.have.length 1
-
-    it "throws error with incorrect expense type", ->
-      expect(->
-        @ledger.addExpense 'hello'
-      ).to.throw(TypeError)
-
-  describe "#createExpense", ->
-    it "creates an expense", ->
-      expect(@ledger.createExpense "Revocup").to.be.an.instanceof(Expense)
-
-    it "adds the new expense to expenses", ->
-      expense = @ledger.createExpense "Revocup"
-      expect(@ledger.expenses.pop()).to.equal(expense)
-
   describe "#deleteAll", ->
     it "deletes all expenses", ->
-      @ledger.addExpense new Expense "Revocup"
+      @ledger.expenses.push new Expense "Revocup"
       @ledger.deleteAll()
 
       expect(
@@ -56,8 +35,8 @@ describe "Ledger", ->
       expense_two.total = ->
         9.99
 
-      @ledger.addExpense expense_one
-      @ledger.addExpense expense_two
+      @ledger.expenses.push expense_one
+      @ledger.expenses.push expense_two
 
       expect(
         @ledger.total()
@@ -71,8 +50,8 @@ describe "Ledger", ->
   describe "#toJSON", ->
     it "formats the expense into JSON", ->
       expense = new Expense "Revocup"
-      @ledger.addExpense expense
-      @ledger.addExpense expense
+      @ledger.expenses.push expense
+      @ledger.expenses.push expense
 
       expect(
         JSON.stringify @ledger.toJSON()
@@ -85,8 +64,8 @@ describe "Ledger", ->
       expense = new Expense "Revocup"
 
       # add two expenses to make sure it lists out correctly
-      @ledger.addExpense expense
-      @ledger.addExpense expense
+      @ledger.expenses.push expense
+      @ledger.expenses.push expense
 
       expect(
         @ledger.toString()
