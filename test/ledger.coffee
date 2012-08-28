@@ -18,7 +18,7 @@ describe "Ledger", ->
 
   describe "#add", ->
     it "adds an expense", ->
-      @ledger.add new Expense "$4", "Revocup"
+      @ledger.add new Expense "Revocup"
 
       expect(
         @ledger.expenses
@@ -31,7 +31,7 @@ describe "Ledger", ->
 
   describe "#deleteAll", ->
     it "deletes all expenses", ->
-      @ledger.add new Expense "$4", "Revocup"
+      @ledger.add new Expense "Revocup"
       @ledger.deleteAll()
 
       expect(
@@ -40,8 +40,8 @@ describe "Ledger", ->
 
   describe "#total", ->
     it "sums the amount of each expense", ->
-      @ledger.add new Expense "$4", "Revocup"
-      @ledger.add new Expense "$13", "Revocup"
+      @ledger.add new Expense "Revocup"
+      @ledger.add new Expense "Revocup"
 
       expect(
         @ledger.total()
@@ -54,7 +54,7 @@ describe "Ledger", ->
 
   describe "#toJSON", ->
     it "formats the expense into JSON", ->
-      expense = new Expense "$4", "Revocup"
+      expense = new Expense "Revocup"
       @ledger.add expense
       @ledger.add expense
 
@@ -66,7 +66,7 @@ describe "Ledger", ->
 
   describe "#toString", ->
     it "creates a list of all expenses", ->
-      expense = new Expense "$13", "Revocup"
+      expense = new Expense "Revocup"
 
       # add two expenses to make sure it lists out correctly
       @ledger.add expense

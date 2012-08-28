@@ -1,15 +1,13 @@
 Accounting = require 'accounting'
 
 class Expense
-  constructor: (amount, @payee, date = new Date) ->
-    @amount = Accounting.unformat(amount)
+  constructor: (@payee, date = new Date) ->
     @date = new Date(date)
 
   toString: ->
-    "#{@date.getMonth()}/#{@date.getDate()} - #{Accounting.formatMoney @amount} at #{@payee}"
+    "#{@date.getMonth()}/#{@date.getDate()} - at #{@payee}"
 
   toJSON: ->
-    amount: @amount
     payee: @payee
     date: @date.getTime()
 
