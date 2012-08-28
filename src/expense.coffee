@@ -1,9 +1,8 @@
 Accounting = require 'accounting'
 
 class Expense
-  constructor: (amount, @payee) ->
+  constructor: (amount, @payee, @date = new Date) ->
     @amount = Accounting.unformat(amount)
-    @date = new Date
 
   toString: ->
     "#{@date.getMonth()}/#{@date.getDate()} - #{Accounting.formatMoney @amount} at #{@payee}"
