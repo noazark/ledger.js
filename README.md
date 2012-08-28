@@ -8,7 +8,7 @@ functionality in Javascript for use in Node.js and browser projects.
 
 ## Getting Started
 
-```
+```coffee-script
 {Ledger, Expense, Transaction} = require 'ledger.js'
 
 revocup = new Expense("Revocup")
