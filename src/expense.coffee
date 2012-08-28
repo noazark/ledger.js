@@ -9,9 +9,8 @@ class Expense
     "#{@date.getMonth()}/#{@date.getDate()} - #{Accounting.formatMoney @amount} at #{@payee}"
 
   toJSON: ->
-    JSON.stringify
-      amount: @amount
-      payee: @payee
-      date: @date.getTime()
+    amount: @amount
+    payee: @payee
+    date: @date.getTime()
 
 module.exports = Expense

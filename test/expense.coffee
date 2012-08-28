@@ -39,9 +39,8 @@ describe "Expense", ->
     it "formats the expense into JSON", ->
       expect(
         @expense.toJSON()
-      ).to.equal(
-        JSON.stringify
-          amount: 4,
-          payee: "Revocup",
-          date: @now.getTime()
+      ).to.eql(
+        amount: 4,
+        payee: "Revocup",
+        date: @now.getTime()
       )

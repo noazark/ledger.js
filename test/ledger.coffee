@@ -59,8 +59,8 @@ describe "Ledger", ->
       @ledger.add expense
 
       expect(
-        @ledger.toJSON()
-      ).to.equal(
+        JSON.stringify @ledger.toJSON()
+      ).to.eql(
         JSON.stringify [expense, expense]
       )
 
