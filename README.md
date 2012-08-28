@@ -9,16 +9,25 @@ functionality in Javascript for use in Node.js and browser projects.
 ## Getting Started
 
 ```
-{Ledger, Expense} = require 'ledger.js'
+{Ledger, Expense, Transaction} = require 'ledger.js'
+
+revocup = new Expense("Revocup")
+revocup.transactions.push new Transaction "$4", "Expenses:Beverages:Coffee"
+
+newEgg = new Expense("Revocup")
+newEgg.transactions.push new Transaction "$17", "Expenses:Computers"
 
 ledger = new Ledger
-ledger.expenses.push new Expense("$4", "Revocup")
-ledger.expenses.push new Expense("$17", "New Egg")
+ledger.expenses.push revocup
+ledger.expenses.push newEgg
 
 ledger.total()
-  #=> $21.00
+  #=> 21.00
 
-ledger.expenses.push new Expense("$10.57", "Elite Comics", new Date(2012, 7, 3))
+eliteComics = new Expense("Elite Comics", new Date(2012, 7, 3))
+eliteComics.transactions.push new Transaction "$10.57", "Expenses:Comics"
+
+ledger.expenses.push eliteComics
 
 ledger.toString()
   #=> 7/28 - $4 at Revocup
