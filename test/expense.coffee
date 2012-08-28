@@ -33,8 +33,7 @@ describe "Expense", ->
 
   describe "#total", ->
     it "sums the amount of each transaction", ->
-      @expense.addTransaction new Transaction "$4"
-      @expense.addTransaction new Transaction "$5.64"
+      @expense.transactions = [{amount: 4}, {amount: 5.64}]
 
       expect(
         @expense.total()
@@ -42,8 +41,7 @@ describe "Expense", ->
 
   describe "#toString", ->
     it "formats the expense into a readable string", ->
-      @expense.addTransaction new Transaction "$4"
-      @expense.addTransaction new Transaction "$3.20"
+      @expense.transactions = [{amount: 4}, {amount: 3.20}]
 
       expect(
         @expense.toString()
