@@ -12,13 +12,13 @@ functionality in Javascript for use in Node.js and browser projects.
 {Ledger, Expense} = require 'ledger.js'
 
 ledger = new Ledger
-ledger.add new Expense("$4", "Revocup")
-ledger.add new Expense("$17", "New Egg")
+ledger.expenses.push new Expense("$4", "Revocup")
+ledger.expenses.push new Expense("$17", "New Egg")
 
 ledger.total()
   #=> $21.00
 
-ledger.add new Expense("$10.57", "Elite Comics", new Date(2012, 7, 3))
+ledger.expenses.push new Expense("$10.57", "Elite Comics", new Date(2012, 7, 3))
 
 ledger.toString()
   #=> 7/28 - $4 at Revocup
