@@ -1,4 +1,5 @@
 Expense = require '../src/expense'
+Transaction = require '../src/transaction'
 
 expect = require('chai').expect
 sinon = require 'sinon'
@@ -24,8 +25,25 @@ describe "Expense", ->
   it "timestamps itself when created", ->
     expect(@expense.date).to.eql @now
 
+  describe "#addTransaction", ->
+    it "attaches a transaction to the expense", ->
+      @expense.addTransaction new Transaction "$0"
+
+      expect(@expense.transactions).to.have.length(1)
+
+  describe "#total", ->
+    it "sums the amount of each transaction", ->
+      @expense.addTransaction new Transaction "$4"
+      @expense.addTransaction new Transaction "$5.64"
+
+      expect(
+        @expense.total()
+      ).to.equal(9.64)
+
   describe "#toString", ->
     it "formats the expense into a readable string", ->
+      @expense.addTransaction new Transaction "$4"
+
       expect(
         @expense.toString()
       ).to.equal(

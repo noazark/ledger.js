@@ -40,17 +40,25 @@ describe "Ledger", ->
 
   describe "#total", ->
     it "sums the amount of each expense", ->
-      @ledger.add new Expense "Revocup"
-      @ledger.add new Expense "Revocup"
+      expense_one = new Expense "Revocup"
+      expense_one.total = ->
+        4.56
+
+      expense_two = new Expense "Revocup"
+      expense_two.total = ->
+        9.99
+
+      @ledger.add expense_one
+      @ledger.add expense_two
 
       expect(
         @ledger.total()
-      ).to.equal("$17.00")
+      ).to.equal(14.55)
 
     it "returns zero dolars when there are no expesnse", ->
       expect(
         @ledger.total()
-      ).to.equal("$0.00")
+      ).to.equal(0)
 
   describe "#toJSON", ->
     it "formats the expense into JSON", ->

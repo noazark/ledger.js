@@ -17,8 +17,8 @@ class Ledger
 
   total: ->
     total = 0
-    total += expense.amount for expense in @all()
-    return Accounting.formatMoney total
+    total += expense.total() for expense in @all()
+    return total
   
   toJSON: ->
     expense.toJSON() for expense in @all()
