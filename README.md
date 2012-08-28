@@ -13,19 +13,23 @@ functionality in Javascript for use in Node.js and browser projects.
 
 revocup = new Expense("Revocup")
 revocup.transactions.push new Transaction "$4", "Expenses:Beverages:Coffee"
+newEgg.transactions.push new Transaction "$-4", "Assets:Checking"
 
 newEgg = new Expense("Revocup")
 newEgg.transactions.push new Transaction "$17", "Expenses:Computers"
+newEgg.transactions.push new Transaction "$-17", "Assets:Checking"
 
 ledger = new Ledger
 ledger.expenses.push revocup
 ledger.expenses.push newEgg
 
+# using double-entry accounting, we should see $0
 ledger.total()
-  #=> 21.00
+  #=> 0.00
 
 eliteComics = new Expense("Elite Comics", new Date(2012, 7, 3))
 eliteComics.transactions.push new Transaction "$10.57", "Expenses:Comics"
+eliteComics.transactions.push new Transaction "$-10.57", "Assets:Checking"
 
 ledger.expenses.push eliteComics
 
