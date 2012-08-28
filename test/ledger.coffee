@@ -29,6 +29,14 @@ describe "Ledger", ->
         @ledger.addExpense 'hello'
       ).to.throw(TypeError)
 
+  describe "#createExpense", ->
+    it "creates an expense", ->
+      expect(@ledger.createExpense "Revocup").to.be.an.instanceof(Expense)
+
+    it "adds the new expense to expenses", ->
+      expense = @ledger.createExpense "Revocup"
+      expect(@ledger.expenses.pop()).to.equal(expense)
+
   describe "#deleteAll", ->
     it "deletes all expenses", ->
       @ledger.addExpense new Expense "Revocup"
