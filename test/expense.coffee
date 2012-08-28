@@ -34,3 +34,14 @@ describe "Expense", ->
       ).to.equal(
         "7/17 - $4.00 at Revocup"
       )
+
+  describe "#toJSON", ->
+    it "formats the expense into JSON", ->
+      expect(
+        @expense.toJSON()
+      ).to.equal(
+        JSON.stringify
+          amount: 4,
+          payee: "Revocup",
+          date: @now.getTime()
+      )

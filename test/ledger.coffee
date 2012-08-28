@@ -52,6 +52,18 @@ describe "Ledger", ->
         @ledger.total()
       ).to.equal("$0.00")
 
+  describe "#toJSON", ->
+    it "formats the expense into JSON", ->
+      expense = new Expense "$4", "Revocup"
+      @ledger.add expense
+      @ledger.add expense
+
+      expect(
+        @ledger.toJSON()
+      ).to.equal(
+        JSON.stringify [expense, expense]
+      )
+
   describe "#toString", ->
     it "creates a list of all expenses", ->
       expense = new Expense "$13", "Revocup"
