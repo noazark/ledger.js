@@ -5,7 +5,7 @@ class Ledger
   constructor: () ->
     @expenses = []
 
-  add: (expense) ->
+  addExpense: (expense) ->
     throw new TypeError unless expense instanceof Expense
     @expenses.push expense
 
