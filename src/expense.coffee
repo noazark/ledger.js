@@ -10,6 +10,11 @@ class Expense
     throw new TypeError unless transaction instanceof Transaction
     @transactions.push transaction
 
+  createTransaction: (params...) ->
+    transaction = new Transaction params...
+    @addTransaction transaction
+    return transaction
+
   total: ->
     total = 0
     total += transaction.amount for transaction in @transactions
