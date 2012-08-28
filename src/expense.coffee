@@ -21,5 +21,6 @@ class Expense
   toJSON: ->
     payee: @payee
     date: @date.getTime()
+    transactions: transaction.toJSON() for transaction in @transactions
 
 module.exports = Expense

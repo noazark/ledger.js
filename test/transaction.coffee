@@ -16,3 +16,12 @@ describe "Transaction", ->
       ).to.equal(
         "$4.53 from Expenses:Auto:Gas"
       )
+
+  describe "#toJSON", ->
+    it "formats the expense into JSON", ->
+      expect(
+        @transaction.toJSON()
+      ).to.eql(
+        amount: 4.53,
+        account: "Expenses:Auto:Gas"
+      )

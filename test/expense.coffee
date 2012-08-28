@@ -51,9 +51,32 @@ describe "Expense", ->
 
   describe "#toJSON", ->
     it "formats the expense into JSON", ->
+      @expense.transactions = [
+        {
+          toJSON: ->
+            amount: 3.40
+            account: "Expenses:Auto:Repair"
+        },
+        {
+          toJSON: ->
+            amount: 5.63,
+            account: "Expenses:Beverage:Coffee"
+        }
+      ]
+
       expect(
         @expense.toJSON()
       ).to.eql(
         payee: "Revocup",
-        date: @now.getTime()
+        date: @now.getTime(),
+        transactions: [
+          {
+            amount: 3.40,
+            account: "Expenses:Auto:Repair"
+          },
+          {
+            amount: 5.63,
+            account: "Expenses:Beverage:Coffee"
+          }
+        ]
       )

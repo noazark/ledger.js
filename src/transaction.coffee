@@ -7,4 +7,8 @@ class Transaction
   toString: ->
     "#{Accounting.formatMoney @amount} from #{@account}"
 
+  toJSON: ->
+    amount: @amount
+    account: @account
+
 module.exports = Transaction
