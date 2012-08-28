@@ -10,6 +10,17 @@ describe "Expense", ->
 
     @expense = new Expense "$4", "Revocup"
 
+  it "optionally accepts a custom Date", ->
+    next_day =  new Date(2012, 7, 18)
+    @expense = new Expense "$13", "Target", next_day
+    
+    expect(@expense.date).to.eql next_day
+
+  it "deligates date parameter to Date object", ->
+    @expense = new Expense "$13", "Target", 17
+    
+    expect(@expense.date).to.eql new Date(17)
+
   it "converts accounting formatted amounts to Number", ->
     expect(@expense.amount).to.equal 4
 
