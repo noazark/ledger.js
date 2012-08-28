@@ -43,11 +43,12 @@ describe "Expense", ->
   describe "#toString", ->
     it "formats the expense into a readable string", ->
       @expense.addTransaction new Transaction "$4"
+      @expense.addTransaction new Transaction "$3.20"
 
       expect(
         @expense.toString()
       ).to.equal(
-        "7/17 - $4.00 at Revocup"
+        "7/17 - $7.20 at Revocup"
       )
 
   describe "#toJSON", ->
