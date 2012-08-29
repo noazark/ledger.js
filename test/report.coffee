@@ -27,8 +27,8 @@ describe "Report", ->
     it "iterates through transactions", ->
       output = []
 
-      Report.eachTransaction @ledger, '', (ledger, expense, transaction)->
-        output.push transaction
+      for line in Report.eachTransaction @ledger, ''
+        output.push line.transaction
 
       transactions = [@money_in, @money_out, @coffee_in, @coffee_out]
 
@@ -37,8 +37,8 @@ describe "Report", ->
     it "filters transactions by account", ->
       output = []
 
-      Report.eachTransaction @ledger, /checking/i, (ledger, expense, transaction)->
-        output.push transaction
+      for line in Report.eachTransaction @ledger, /checking/i
+        output.push line.transaction
 
       transactions = [@money_in, @coffee_out]
 

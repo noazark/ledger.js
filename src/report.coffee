@@ -11,10 +11,17 @@ class Report
       subsections.slice(0, index + 1).join(':')
 
   @eachTransaction: (ledger, matcher, callback) ->
+    transactions = []
     for expense in ledger.all()
       for transaction in expense.transactions
         if transaction.account.match(matcher)
-          callback(ledger, expense, transaction)
+          transactions.push {
+            ledger: ledger, 
+            expense: expense, 
+            transaction: transaction
+          }
+
+    return transactions
 
   @calculateBalance: (transactionAmount, initialBalance = 0) ->
     initialBalance += transactionAmount
