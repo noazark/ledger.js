@@ -1,4 +1,4 @@
-exports.Ledger = require './src/ledger'
+exports.Journal = require './src/journal'
 exports.Transaction = require './src/transaction'
 exports.Posting = require './src/posting'
 exports.Report = require './src/report'

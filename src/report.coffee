@@ -10,13 +10,13 @@ class Report
     for subaccount, index in subsections
       subsections.slice(0, index + 1).join(':')
 
-  @eachPosting: (ledger, matcher, callback) ->
+  @eachPosting: (journal, matcher, callback) ->
     postings = []
-    for transaction in ledger.all()
+    for transaction in journal.all()
       for posting in transaction.postings
         if posting.account.match(matcher)
           postings.push {
-            ledger: ledger, 
+            journal: journal, 
             transaction: transaction, 
             posting: posting
           }

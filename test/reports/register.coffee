@@ -1,4 +1,4 @@
-Ledger = require '../../src/ledger'
+Journal = require '../../src/journal'
 Transaction = require '../../src/transaction'
 Posting = require '../../src/posting'
 
@@ -15,11 +15,11 @@ describe "Register", ->
       @opening.postings.push @money_in
       @opening.postings.push @money_out
 
-      @ledger = new Ledger
-      @ledger.transactions.push @opening
+      @journal = new Journal
+      @journal.transactions.push @opening
 
     it "creates a running balance from each posting", ->
-      expect(Register.calculate @ledger).to.eql [
+      expect(Register.calculate @journal).to.eql [
         {
           transaction: @opening,
           posting: @money_in,

@@ -1,4 +1,4 @@
-Ledger = require '../src/ledger'
+Journal = require '../src/journal'
 Transaction = require '../src/transaction'
 Posting = require '../src/posting'
 
@@ -21,13 +21,13 @@ describe "Report", ->
       @revo.postings.push @coffee_in
       @revo.postings.push @coffee_out
 
-      @ledger = new Ledger
-      @ledger.transactions.push @opening, @revo
+      @journal = new Journal
+      @journal.transactions.push @opening, @revo
 
     it "iterates through postings", ->
       output = []
 
-      for line in Report.eachPosting @ledger, ''
+      for line in Report.eachPosting @journal, ''
         output.push line.posting
 
       postings = [@money_in, @money_out, @coffee_in, @coffee_out]
@@ -37,7 +37,7 @@ describe "Report", ->
     it "filters postings by account", ->
       output = []
 
-      for line in Report.eachPosting @ledger, /checking/i
+      for line in Report.eachPosting @journal, /checking/i
         output.push line.posting
 
       postings = [@money_in, @coffee_out]

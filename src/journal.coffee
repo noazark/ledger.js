@@ -1,7 +1,7 @@
 Accounting = require 'accounting'
 Transaction = require './transaction'
 
-class Ledger
+class Journal
   constructor: () ->
     @transactions = []
 
@@ -22,4 +22,4 @@ class Ledger
   toString: ->
     (transaction.toString() for transaction in @all()).join("\n")
 
-module.exports = Ledger
+module.exports = Journal

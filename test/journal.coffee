@@ -1,28 +1,28 @@
-Ledger = require '../src/ledger'
+Journal = require '../src/journal'
 Transaction = require '../src/transaction'
 
 expect = require('chai').expect
 
-describe "Ledger", ->
+describe "Journal", ->
   beforeEach ->
-    @ledger = new Ledger
+    @journal = new Journal
 
   describe "#all", ->
     it "returns all transactions", ->
       array = ['a', 'b']
-      @ledger.transactions = ['a', 'b']
+      @journal.transactions = ['a', 'b']
 
       expect(
-        @ledger.all()
+        @journal.all()
       ).to.eql(array)
 
   describe "#deleteAll", ->
     it "deletes all transactions", ->
-      @ledger.transactions.push new Transaction "Revocup"
-      @ledger.deleteAll()
+      @journal.transactions.push new Transaction "Revocup"
+      @journal.deleteAll()
 
       expect(
-        @ledger.transactions
+        @journal.transactions
       ).to.be.empty
 
   describe "#total", ->
@@ -35,26 +35,26 @@ describe "Ledger", ->
       transaction_two.total = ->
         9.99
 
-      @ledger.transactions.push transaction_one
-      @ledger.transactions.push transaction_two
+      @journal.transactions.push transaction_one
+      @journal.transactions.push transaction_two
 
       expect(
-        @ledger.total()
+        @journal.total()
       ).to.equal(14.55)
 
     it "returns zero dolars when there are no expesnse", ->
       expect(
-        @ledger.total()
+        @journal.total()
       ).to.equal(0)
 
   describe "#toJSON", ->
     it "formats the transaction into JSON", ->
       transaction = new Transaction "Revocup"
-      @ledger.transactions.push transaction
-      @ledger.transactions.push transaction
+      @journal.transactions.push transaction
+      @journal.transactions.push transaction
 
       expect(
-        JSON.stringify @ledger.toJSON()
+        JSON.stringify @journal.toJSON()
       ).to.eql(
         JSON.stringify [transaction, transaction]
       )
@@ -64,11 +64,11 @@ describe "Ledger", ->
       transaction = new Transaction "Revocup"
 
       # add two transactions to make sure it lists out correctly
-      @ledger.transactions.push transaction
-      @ledger.transactions.push transaction
+      @journal.transactions.push transaction
+      @journal.transactions.push transaction
 
       expect(
-        @ledger.toString()
+        @journal.toString()
       ).to.equal(
         "#{transaction.toString()}" + "\n" +
         "#{transaction.toString()}"
@@ -76,5 +76,5 @@ describe "Ledger", ->
 
     it "creates an empty string when there are no transactions", ->
       expect(
-        @ledger.toString()
+        @journal.toString()
       ).to.be.empty

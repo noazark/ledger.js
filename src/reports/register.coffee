@@ -2,13 +2,13 @@ Accounting = require 'accounting'
 Report = require '../report'
 
 class Register extends Report
-  constructor: (@ledger, @matcher) ->
+  constructor: (@journal, @matcher) ->
 
-  @calculate: (ledger, matcher) ->
+  @calculate: (journal, matcher) ->
     register = 0
     postings = []
 
-    for line in @eachPosting ledger, matcher
+    for line in @eachPosting journal, matcher
       register = @calculateBalance line.posting.amount, register
 
       postings.push {
@@ -20,7 +20,7 @@ class Register extends Report
     return postings
 
   toString: ->
-    output = for line in Register.calculate(@ledger, @matcher)
+    output = for line in Register.calculate(@journal, @matcher)
       "#{line.transaction.payee} - #{line.posting.account} - #{Accounting.formatMoney line.posting.amount} #{Accounting.formatMoney line.balance}"
 
     output.join("\n")
