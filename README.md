@@ -1,7 +1,7 @@
 Ledger.js
 =========
 
-[![Build Status](https://secure.travis-ci.org/noazark/ledger.js.png?branch=master)](http://travis-ci.org/noazark/ledger.js)
+[![Build Status]](http://travis-ci.org/noazark/ledger.js)
 
 Ledger.js is inspired by it's namesake [ledger] and seeks to replicate the
 functionality in Javascript for use in Node.js and browser projects.
@@ -9,17 +9,17 @@ functionality in Javascript for use in Node.js and browser projects.
 ## Getting Started
 
 ```coffee-script
-{Ledger, Expense, Transaction} = require 'ledger.js'
+{Journal, Transaction, Posting} = require 'ledger.js'
 
-revocup = new Expense("Revocup")
-revocup.transactions.push new Transaction "$4", "Expenses:Beverages:Coffee"
-newEgg.transactions.push new Transaction "$-4", "Assets:Checking"
+revocup = new Transaction("Revocup")
+revocup.postings.push new Posting "$4", "Expenses:Beverages:Coffee"
+newEgg.postings.push new Posting "$-4", "Assets:Checking"
 
-newEgg = new Expense("Revocup")
-newEgg.transactions.push new Transaction "$17", "Expenses:Computers"
-newEgg.transactions.push new Transaction "$-17", "Assets:Checking"
+newEgg = new Transaction("Revocup")
+newEgg.postings.push new Posting "$17", "Expenses:Computers"
+newEgg.postings.push new Posting "$-17", "Assets:Checking"
 
-ledger = new Ledger
+ledger = new Journal
 ledger.expenses.push revocup
 ledger.expenses.push newEgg
 
@@ -27,9 +27,9 @@ ledger.expenses.push newEgg
 ledger.total()
   #=> 0.00
 
-eliteComics = new Expense("Elite Comics", new Date(2012, 7, 3))
-eliteComics.transactions.push new Transaction "$10.57", "Expenses:Comics"
-eliteComics.transactions.push new Transaction "$-10.57", "Assets:Checking"
+eliteComics = new Transaction("Elite Comics", new Date(2012, 7, 3))
+eliteComics.postings.push new Posting "$10.57", "Expenses:Comics"
+eliteComics.postings.push new Posting "$-10.57", "Assets:Checking"
 
 ledger.expenses.push eliteComics
 
@@ -52,4 +52,5 @@ an issue for any features you'd like to see, as long as it has bearing in
 [ledger] I'm sure I'll put it in.
 
 
+[Build Status]: https://secure.travis-ci.org/noazark/ledger.js.png?branch=master
 [ledger]: https://github.com/jwiegley/ledger
