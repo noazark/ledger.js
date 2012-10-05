@@ -10,20 +10,20 @@ class Report
     for subaccount, index in subsections
       subsections.slice(0, index + 1).join(':')
 
-  @eachTransaction: (ledger, matcher, callback) ->
-    transactions = []
-    for expense in ledger.all()
-      for transaction in expense.transactions
-        if transaction.account.match(matcher)
-          transactions.push {
-            ledger: ledger, 
-            expense: expense, 
-            transaction: transaction
+  @eachPosting: (journal, matcher, callback) ->
+    postings = []
+    for transaction in journal.all()
+      for posting in transaction.postings
+        if posting.account.match(matcher)
+          postings.push {
+            journal: journal, 
+            transaction: transaction, 
+            posting: posting
           }
 
-    return transactions
+    return postings
 
-  @calculateBalance: (transactionAmount, initialBalance = 0) ->
-    initialBalance += transactionAmount
+  @calculateBalance: (postingAmount, initialBalance = 0) ->
+    initialBalance += postingAmount
 
 module.exports = Report

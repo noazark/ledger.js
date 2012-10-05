@@ -1,6 +1,6 @@
-Ledger = require '../../src/ledger'
-Expense = require '../../src/expense'
+Journal = require '../../src/journal'
 Transaction = require '../../src/transaction'
+Posting = require '../../src/posting'
 
 Register = require '../../src/reports/register'
 
@@ -9,26 +9,25 @@ expect = require('chai').expect
 describe "Register", ->
   describe ".calculate", ->
     beforeEach ->
-      @opening = new Expense "Opening Balance"
-      @money_in = new Transaction "$100.00", "Assets:Bank:Checking"
-      @money_out = new Transaction "$-100.00", "Liabilities:Opening Balance"
-      @opening.transactions.push @money_in
-      @opening.transactions.push @money_out
+      @opening = new Transaction "Opening Balance"
+      @money_in = new Posting "$100.00", "Assets:Bank:Checking"
+      @money_out = new Posting "$-100.00", "Liabilities:Opening Balance"
+      @opening.postings.push @money_in
+      @opening.postings.push @money_out
 
-      @ledger = new Ledger
-      @ledger.expenses.push @opening
+      @journal = new Journal
+      @journal.transactions.push @opening
 
-    it "creates a running balance from each transaction", ->
-      console.log Register.calculate @ledger
-      expect(Register.calculate @ledger).to.eql [
+    it "creates a running balance from each posting", ->
+      expect(Register.calculate @journal).to.eql [
         {
-          expense: @opening,
-          transaction: @money_in,
+          transaction: @opening,
+          posting: @money_in,
           balance: 100
         },
         {
-          expense: @opening,
-          transaction: @money_out,
+          transaction: @opening,
+          posting: @money_out,
           balance: 0
         }
       ]

@@ -1,14 +1,22 @@
 Accounting = require 'accounting'
+Posting = require './posting'
 
 class Transaction
-  constructor: (amount, @account)->
-    @amount = Accounting.unformat(amount)
+  constructor: (@payee, date = new Date) ->
+    @postings = []
+    @date = new Date(date)
+
+  total: ->
+    total = 0
+    total += posting.amount for posting in @postings
+    return total
 
   toString: ->
-    "#{Accounting.formatMoney @amount} from #{@account}"
+    "#{@date.getMonth()}/#{@date.getDate()} - #{Accounting.formatMoney @total()} at #{@payee}"
 
   toJSON: ->
-    amount: @amount
-    account: @account
+    payee: @payee
+    date: @date.getTime()
+    postings: posting.toJSON() for posting in @postings
 
 module.exports = Transaction

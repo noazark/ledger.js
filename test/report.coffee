@@ -1,48 +1,48 @@
-Ledger = require '../src/ledger'
-Expense = require '../src/expense'
+Journal = require '../src/journal'
 Transaction = require '../src/transaction'
+Posting = require '../src/posting'
 
 Report = require '../src/report'
 
 expect = require('chai').expect
 
 describe "Report", ->
-  describe ".eachTransaction", ->
+  describe ".eachPosting", ->
     beforeEach ->
-      @opening = new Expense "Opening Balance"
-      @money_in = new Transaction "$100.00", "Assets:Bank:Checking"
-      @money_out = new Transaction "$-100.00", "Liabilities:Opening Balance"
-      @opening.transactions.push @money_in
-      @opening.transactions.push @money_out
+      @opening = new Transaction "Opening Balance"
+      @money_in = new Posting "$100.00", "Assets:Bank:Checking"
+      @money_out = new Posting "$-100.00", "Liabilities:Opening Balance"
+      @opening.postings.push @money_in
+      @opening.postings.push @money_out
 
-      @revo = new Expense "Revocup"
-      @coffee_in = new Transaction "$2.17", "Expenses:Beverages:Coffee"
-      @coffee_out = new Transaction "$-2.17", "Assets:Bank:Checking"
-      @revo.transactions.push @coffee_in
-      @revo.transactions.push @coffee_out
+      @revo = new Transaction "Revocup"
+      @coffee_in = new Posting "$2.17", "Transactions:Beverages:Coffee"
+      @coffee_out = new Posting "$-2.17", "Assets:Bank:Checking"
+      @revo.postings.push @coffee_in
+      @revo.postings.push @coffee_out
 
-      @ledger = new Ledger
-      @ledger.expenses.push @opening, @revo
+      @journal = new Journal
+      @journal.transactions.push @opening, @revo
 
-    it "iterates through transactions", ->
+    it "iterates through postings", ->
       output = []
 
-      for line in Report.eachTransaction @ledger, ''
-        output.push line.transaction
+      for line in Report.eachPosting @journal, ''
+        output.push line.posting
 
-      transactions = [@money_in, @money_out, @coffee_in, @coffee_out]
+      postings = [@money_in, @money_out, @coffee_in, @coffee_out]
 
-      expect(output).to.eql(transactions)
+      expect(output).to.eql(postings)
 
-    it "filters transactions by account", ->
+    it "filters postings by account", ->
       output = []
 
-      for line in Report.eachTransaction @ledger, /checking/i
-        output.push line.transaction
+      for line in Report.eachPosting @journal, /checking/i
+        output.push line.posting
 
-      transactions = [@money_in, @coffee_out]
+      postings = [@money_in, @coffee_out]
 
-      expect(output).to.eql(transactions)
+      expect(output).to.eql(postings)
 
 
   describe ".eachSubaccount", ->
