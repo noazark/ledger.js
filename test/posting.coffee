@@ -1,10 +1,10 @@
-Transaction = require '../src/transaction'
+Posting = require '../src/posting'
 
 expect = require('chai').expect
 
-describe "Transaction", ->
+describe "Posting", ->
   beforeEach ->
-    @transaction = new Transaction("$4.53", "Expenses:Auto:Gas")
+    @transaction = new Posting("$4.53", "Expenses:Auto:Gas")
 
   it "converts accounting formatted amounts to Number", ->
     expect(@transaction.amount).to.equal 4.53

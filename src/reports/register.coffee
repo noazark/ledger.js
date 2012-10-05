@@ -6,22 +6,22 @@ class Register extends Report
 
   @calculate: (ledger, matcher) ->
     register = 0
-    transactions = []
+    postings = []
 
-    for line in @eachTransaction ledger, matcher
-      register = @calculateBalance line.transaction.amount, register
+    for line in @eachPosting ledger, matcher
+      register = @calculateBalance line.posting.amount, register
 
-      transactions.push {
+      postings.push {
         expense: line.expense
-        transaction: line.transaction
+        posting: line.posting
         balance: register
       }
 
-    return transactions
+    return postings
 
   toString: ->
     output = for line in Register.calculate(@ledger, @matcher)
-      "#{line.expense.payee} - #{line.transaction.account} - #{Accounting.formatMoney line.transaction.amount} #{Accounting.formatMoney line.balance}"
+      "#{line.expense.payee} - #{line.posting.account} - #{Accounting.formatMoney line.posting.amount} #{Accounting.formatMoney line.balance}"
 
     output.join("\n")
 

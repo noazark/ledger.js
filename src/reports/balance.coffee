@@ -7,9 +7,9 @@ class Balance extends Report
   @calculate: (ledger, matcher) ->
     balances = {}
 
-    for line in @eachTransaction ledger, matcher
-      for subaccount in @eachSubaccount line.transaction.account
-        balances[subaccount] = @calculateBalance line.transaction.amount, balances[subaccount]
+    for line in @eachPosting ledger, matcher
+      for subaccount in @eachSubaccount line.posting.account
+        balances[subaccount] = @calculateBalance line.posting.amount, balances[subaccount]
 
     return balances
 

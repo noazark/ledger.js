@@ -1,5 +1,5 @@
 Expense = require '../src/expense'
-Transaction = require '../src/transaction'
+Posting = require '../src/posting'
 
 expect = require('chai').expect
 sinon = require 'sinon'
@@ -26,8 +26,8 @@ describe "Expense", ->
     expect(@expense.date).to.eql @now
 
   describe "#total", ->
-    it "sums the amount of each transaction", ->
-      @expense.transactions = [{amount: 4}, {amount: 5.64}]
+    it "sums the amount of each posting", ->
+      @expense.postings = [{amount: 4}, {amount: 5.64}]
 
       expect(
         @expense.total()
@@ -35,7 +35,7 @@ describe "Expense", ->
 
   describe "#toString", ->
     it "formats the expense into a readable string", ->
-      @expense.transactions = [{amount: 4}, {amount: 3.20}]
+      @expense.postings = [{amount: 4}, {amount: 3.20}]
 
       expect(
         @expense.toString()
@@ -45,7 +45,7 @@ describe "Expense", ->
 
   describe "#toJSON", ->
     it "formats the expense into JSON", ->
-      @expense.transactions = [
+      @expense.postings = [
         {
           toJSON: ->
             amount: 3.40
@@ -63,7 +63,7 @@ describe "Expense", ->
       ).to.eql(
         payee: "Revocup",
         date: @now.getTime(),
-        transactions: [
+        postings: [
           {
             amount: 3.40,
             account: "Expenses:Auto:Repair"

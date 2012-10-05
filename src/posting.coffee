@@ -1,6 +1,6 @@
 Accounting = require 'accounting'
 
-class Transaction
+class Posting
   constructor: (amount, @account)->
     @amount = Accounting.unformat(amount)
 
@@ -11,4 +11,4 @@ class Transaction
     amount: @amount
     account: @account
 
-module.exports = Transaction
+module.exports = Posting

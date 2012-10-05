@@ -1,6 +1,6 @@
 Ledger = require '../../src/ledger'
 Expense = require '../../src/expense'
-Transaction = require '../../src/transaction'
+Posting = require '../../src/posting'
 
 Balance = require '../../src/reports/balance'
 
@@ -10,10 +10,10 @@ describe "Balance", ->
   describe ".calculate", ->
     beforeEach ->
       @opening = new Expense "Opening Balance"
-      @money_in = new Transaction "$100.00", "Assets:Bank:Checking"
-      @money_out = new Transaction "$-100.00", "Liabilities:Opening Balance"
-      @opening.transactions.push @money_in
-      @opening.transactions.push @money_out
+      @money_in = new Posting "$100.00", "Assets:Bank:Checking"
+      @money_out = new Posting "$-100.00", "Liabilities:Opening Balance"
+      @opening.postings.push @money_in
+      @opening.postings.push @money_out
 
       @ledger = new Ledger
       @ledger.expenses.push @opening
