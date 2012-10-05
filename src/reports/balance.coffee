@@ -2,19 +2,19 @@ Accounting = require 'accounting'
 Report = require '../report'
 
 class Balance extends Report
-  constructor: (@ledger, @matcher) ->
+  constructor: (@journal, @matcher) ->
 
-  @calculate: (ledger, matcher) ->
+  @calculate: (journal, matcher) ->
     balances = {}
 
-    for line in @eachTransaction ledger, matcher
-      for subaccount in @eachSubaccount line.transaction.account
-        balances[subaccount] = @calculateBalance line.transaction.amount, balances[subaccount]
+    for line in @eachPosting journal, matcher
+      for subaccount in @eachSubaccount line.posting.account
+        balances[subaccount] = @calculateBalance line.posting.amount, balances[subaccount]
 
     return balances
 
   toString: ->
-    output = for account, amount of Balance.calculate(@ledger, @matcher)
+    output = for account, amount of Balance.calculate(@journal, @matcher)
       "#{Accounting.formatMoney amount}  #{account}"
 
     return output.join("\n")
