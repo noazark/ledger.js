@@ -1,7 +1,7 @@
 Accounting = require 'accounting'
 Posting = require './posting'
 
-class Expense
+class Transaction
   constructor: (@payee, date = new Date) ->
     @postings = []
     @date = new Date(date)
@@ -19,4 +19,4 @@ class Expense
     date: @date.getTime()
     postings: posting.toJSON() for posting in @postings
 
-module.exports = Expense
+module.exports = Transaction

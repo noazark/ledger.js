@@ -12,12 +12,12 @@ class Report
 
   @eachPosting: (ledger, matcher, callback) ->
     postings = []
-    for expense in ledger.all()
-      for posting in expense.postings
+    for transaction in ledger.all()
+      for posting in transaction.postings
         if posting.account.match(matcher)
           postings.push {
             ledger: ledger, 
-            expense: expense, 
+            transaction: transaction, 
             posting: posting
           }
 

@@ -1,25 +1,25 @@
 Accounting = require 'accounting'
-Expense = require './expense'
+Transaction = require './transaction'
 
 class Ledger
   constructor: () ->
-    @expenses = []
+    @transactions = []
 
   all: ->
-    @expenses
+    @transactions
 
   deleteAll: ->
-    @expenses = []
+    @transactions = []
 
   total: ->
     total = 0
-    total += expense.total() for expense in @all()
+    total += transaction.total() for transaction in @all()
     return total
   
   toJSON: ->
-    expense.toJSON() for expense in @all()
+    transaction.toJSON() for transaction in @all()
 
   toString: ->
-    (expense.toString() for expense in @all()).join("\n")
+    (transaction.toString() for transaction in @all()).join("\n")
 
 module.exports = Ledger

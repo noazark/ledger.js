@@ -1,5 +1,5 @@
 Ledger = require '../src/ledger'
-Expense = require '../src/expense'
+Transaction = require '../src/transaction'
 
 expect = require('chai').expect
 
@@ -8,35 +8,35 @@ describe "Ledger", ->
     @ledger = new Ledger
 
   describe "#all", ->
-    it "returns all expenses", ->
+    it "returns all transactions", ->
       array = ['a', 'b']
-      @ledger.expenses = ['a', 'b']
+      @ledger.transactions = ['a', 'b']
 
       expect(
         @ledger.all()
       ).to.eql(array)
 
   describe "#deleteAll", ->
-    it "deletes all expenses", ->
-      @ledger.expenses.push new Expense "Revocup"
+    it "deletes all transactions", ->
+      @ledger.transactions.push new Transaction "Revocup"
       @ledger.deleteAll()
 
       expect(
-        @ledger.expenses
+        @ledger.transactions
       ).to.be.empty
 
   describe "#total", ->
-    it "sums the amount of each expense", ->
-      expense_one = new Expense "Revocup"
-      expense_one.total = ->
+    it "sums the amount of each transaction", ->
+      transaction_one = new Transaction "Revocup"
+      transaction_one.total = ->
         4.56
 
-      expense_two = new Expense "Revocup"
-      expense_two.total = ->
+      transaction_two = new Transaction "Revocup"
+      transaction_two.total = ->
         9.99
 
-      @ledger.expenses.push expense_one
-      @ledger.expenses.push expense_two
+      @ledger.transactions.push transaction_one
+      @ledger.transactions.push transaction_two
 
       expect(
         @ledger.total()
@@ -48,33 +48,33 @@ describe "Ledger", ->
       ).to.equal(0)
 
   describe "#toJSON", ->
-    it "formats the expense into JSON", ->
-      expense = new Expense "Revocup"
-      @ledger.expenses.push expense
-      @ledger.expenses.push expense
+    it "formats the transaction into JSON", ->
+      transaction = new Transaction "Revocup"
+      @ledger.transactions.push transaction
+      @ledger.transactions.push transaction
 
       expect(
         JSON.stringify @ledger.toJSON()
       ).to.eql(
-        JSON.stringify [expense, expense]
+        JSON.stringify [transaction, transaction]
       )
 
   describe "#toString", ->
-    it "creates a list of all expenses", ->
-      expense = new Expense "Revocup"
+    it "creates a list of all transactions", ->
+      transaction = new Transaction "Revocup"
 
-      # add two expenses to make sure it lists out correctly
-      @ledger.expenses.push expense
-      @ledger.expenses.push expense
+      # add two transactions to make sure it lists out correctly
+      @ledger.transactions.push transaction
+      @ledger.transactions.push transaction
 
       expect(
         @ledger.toString()
       ).to.equal(
-        "#{expense.toString()}" + "\n" +
-        "#{expense.toString()}"
+        "#{transaction.toString()}" + "\n" +
+        "#{transaction.toString()}"
       )
 
-    it "creates an empty string when there are no expenses", ->
+    it "creates an empty string when there are no transactions", ->
       expect(
         @ledger.toString()
       ).to.be.empty

@@ -18,7 +18,7 @@ describe "Posting", ->
       )
 
   describe "#toJSON", ->
-    it "formats the expense into JSON", ->
+    it "formats the transaction into JSON", ->
       expect(
         @transaction.toJSON()
       ).to.eql(

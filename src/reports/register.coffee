@@ -12,7 +12,7 @@ class Register extends Report
       register = @calculateBalance line.posting.amount, register
 
       postings.push {
-        expense: line.expense
+        transaction: line.transaction
         posting: line.posting
         balance: register
       }
@@ -21,7 +21,7 @@ class Register extends Report
 
   toString: ->
     output = for line in Register.calculate(@ledger, @matcher)
-      "#{line.expense.payee} - #{line.posting.account} - #{Accounting.formatMoney line.posting.amount} #{Accounting.formatMoney line.balance}"
+      "#{line.transaction.payee} - #{line.posting.account} - #{Accounting.formatMoney line.posting.amount} #{Accounting.formatMoney line.balance}"
 
     output.join("\n")
 
